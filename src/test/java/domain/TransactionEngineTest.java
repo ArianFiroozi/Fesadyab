@@ -19,6 +19,30 @@ public class TransactionEngineTest {
     }
 
     @Test
+    void getAverageTransactionAmountByAccount_multipleTransactionsByAccount_returnsCorrectAvg() {
+        Transaction transaction2=new Transaction();
+        transaction2.setAccountId(2);
+        transaction2.setTransactionId(2);
+        transaction2.setAmount(1200);
+        transactionEngine.addTransactionAndDetectFraud(transaction);
+        transactionEngine.addTransactionAndDetectFraud(transaction2);
+
+        Assertions.assertEquals(650, transactionEngine.getAverageTransactionAmountByAccount(2));
+    }
+
+    @Test
+    void detectFraudulentTransaction_multipleTransactionsByAccount_returnsCorrectAvg() {
+        Transaction transaction2=new Transaction();
+        transaction2.setAccountId(2);
+        transaction2.setTransactionId(2);
+        transaction2.setAmount(1200);
+        transactionEngine.addTransactionAndDetectFraud(transaction);
+        transactionEngine.addTransactionAndDetectFraud(transaction2);
+
+        Assertions.assertEquals(650, transactionEngine.getAverageTransactionAmountByAccount(2));
+    }
+
+    @Test
     void addTransactionAndDetectFraud_correctTransactionWithFraud_addsTransactionAndReturnsFraudScore() {
         Assertions.assertEquals(100, transactionEngine.addTransactionAndDetectFraud(transaction));
         Assertions.assertTrue(transactionEngine.transactionHistory.contains(transaction));
@@ -99,7 +123,7 @@ public class TransactionEngineTest {
     }
 
     @Test
-    void getTransactionPatternAboveThreshold_multipleSamePatternTransactionsAboveThreshold_returnsZero() {
+    void getTransactionPatternAboveThreshold_multipleSamePatternTransactionsAboveThreshold_returnsCorrectAmount() {
         Transaction transaction2=new Transaction();
         transaction2.setAccountId(2);
         transaction2.setTransactionId(2);
@@ -115,4 +139,10 @@ public class TransactionEngineTest {
 
         Assertions.assertEquals(1100, transactionEngine.getTransactionPatternAboveThreshold(300));
     }
+
+    @Test
+    void getTransactionPatternAboveThreshold_HistIsEmpty_returnsZero() {
+        Assertions.assertEquals(0, transactionEngine.getTransactionPatternAboveThreshold(300));
+    }
+
 }
