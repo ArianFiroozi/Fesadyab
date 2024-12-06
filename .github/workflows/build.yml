@@ -32,9 +32,6 @@ jobs:
 
       - name: Build and Test with Maven
         run: mvn clean install -DskipTests=false --no-transfer-progress
-      
-      - name: Run Tests with Maven
-        run: mvn test --no-transfer-progress
 
 
       - name: Upload Test Results
