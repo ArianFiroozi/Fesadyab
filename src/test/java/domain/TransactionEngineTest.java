@@ -145,4 +145,9 @@ public class TransactionEngineTest {
         Assertions.assertEquals(0, transactionEngine.getTransactionPatternAboveThreshold(300));
     }
 
+    @Test
+    void trigger_workflow() {
+        
+    }
+
 }
