@@ -32,11 +32,3 @@ jobs:
 
       - name: Build and Test with Maven
         run: mvn clean install -DskipTests=false --no-transfer-progress
-
-
-      - name: Upload Test Results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: target/test-*.xml
