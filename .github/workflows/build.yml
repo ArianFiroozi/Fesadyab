@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest  
 
     steps:
       - name: Checkout code
@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
-          distribution: 'adoptopenjdk'
+          distribution: 'temurin' 
 
       - name: Cache Maven dependencies
         uses: actions/cache@v3
@@ -34,7 +34,7 @@ jobs:
         run: mvn clean install -DskipTests=false --no-transfer-progress
 
       - name: Upload Test Results
-        if: always()  
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: test-results
